@@ -6,6 +6,9 @@ namespace Ghost
 {
     public class GhostAI : MonoBehaviour
     {
+        private const int GameLayer = 6;
+        private const int BlackLightLayer = 7;
+        
         private NavMeshAgent _navMeshAgent;
         private Vector3 _lastPosition;
         private bool _isFading;
@@ -14,8 +17,6 @@ namespace Ghost
         private float _standStillTimer;
 
         [SerializeField] private float panicDuration = 1f;
-        [SerializeField] private int gameLayer = 6;
-        [SerializeField] private int blackLightLayer = 7; 
         [SerializeField] private float fadeDelay = 1f;
         [SerializeField] private float wanderRadius = 10f;
     
@@ -23,6 +24,7 @@ namespace Ghost
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _lastPosition = transform.position;
+            gameObject.layer = GameLayer;
             StartCoroutine(Panic());
         }
 
@@ -38,7 +40,7 @@ namespace Ghost
                 _standStillTimer = 0f;
                 _isFading = false;
                 _isVisible = true;
-                gameObject.layer = gameLayer;
+                gameObject.layer = GameLayer;
             }
             else
             {
@@ -101,7 +103,7 @@ namespace Ghost
                 yield return null;
             }
 
-            gameObject.layer = blackLightLayer;
+            gameObject.layer = BlackLightLayer;
             _isVisible = false;
         }
     }
