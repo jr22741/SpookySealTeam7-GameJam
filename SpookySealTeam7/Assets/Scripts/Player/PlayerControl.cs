@@ -3,13 +3,13 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     private Gun _gun;
-    private Light _light;
+    private BlackLight _light;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _gun = GetComponentInChildren<Gun>();
-        _light = GetComponentInChildren<Light>();
+        _light = GetComponentInChildren<BlackLight>();
     }
 
     // Update is called once per frame
