@@ -76,3 +76,4 @@ crashlytics-build.properties
 **/.vscode
 
 *.blend
+*.blend1
