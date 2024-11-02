@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Light : MonoBehaviour
+public class BlackLight : MonoBehaviour
 {
     private bool _lightActive;
     
