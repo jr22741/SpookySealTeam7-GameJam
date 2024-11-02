@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private float extendSpeed = 1.0f;
-    [SerializeField] private float maxRayLength = 5.0f;
+    [SerializeField] private float extendSpeed = 10.0f;
+    [SerializeField] private float maxRayLength = 10.0f;
     [SerializeField] private ParticleSystem suck;
     [SerializeField] private ParticleSystem[] spirals;
     [SerializeField] private Camera cam;
     private float _rayLength;
     private bool _gunActive;
-    private float _attractionSpeed = 0f;
+    private float _attractionSpeed;
 
     public void SetGunActive(bool active)
     {
@@ -20,7 +20,13 @@ public class Gun : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        var emission = suck.emission;
+        emission.enabled = false;
+        foreach (var spiral in spirals)
+        {
+            emission = spiral.emission;
+            emission.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -40,7 +46,6 @@ public class Gun : MonoBehaviour
                 // extend particle system over time
                 if (_rayLength < maxRayLength) _rayLength += extendSpeed * Time.deltaTime;
                 var shape = spiral.shape;
-                shape.position = new Vector3(shape.position.x, shape.position.y, _rayLength);
                 shape.length = _rayLength;
             }
             
@@ -55,7 +60,7 @@ public class Gun : MonoBehaviour
                 emission.enabled = true;
                 
                 Vector3 ghostToGunVec = (transform.position - hitInfo.transform.position).normalized;
-                _attractionSpeed += 8f * Time.deltaTime;
+                _attractionSpeed += 10f * Time.deltaTime;
                 hitInfo.transform.position += ghostToGunVec * (_attractionSpeed * Time.deltaTime);
                 
                 // If the ghost reaches the gun, destroy it
