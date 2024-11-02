@@ -7,6 +7,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private float maxRayLength = 5.0f;
     [SerializeField] private ParticleSystem suck;
     [SerializeField] private ParticleSystem[] spirals;
+    [SerializeField] private Camera cam;
     private float _rayLength;
     private bool _gunActive;
     private float _attractionSpeed = 0f;
@@ -23,8 +24,9 @@ public class Gun : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
+        transform.rotation = cam.transform.rotation;
         ParticleSystem.EmissionModule emission;
         if (_gunActive)
         {
@@ -49,6 +51,7 @@ public class Gun : MonoBehaviour
             RaycastHit hitInfo;
             if (Physics.Raycast(transform.position, fwd, out hitInfo, maxDist, layerMask))
             {
+                emission = suck.emission;
                 emission.enabled = true;
                 
                 Vector3 ghostToGunVec = (transform.position - hitInfo.transform.position).normalized;
@@ -67,6 +70,7 @@ public class Gun : MonoBehaviour
             }
             else
             {
+                emission = suck.emission;
                 emission.enabled = false;
                 _attractionSpeed = 0f;
             }
