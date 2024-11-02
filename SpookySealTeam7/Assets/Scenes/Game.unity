@@ -5445,6 +5445,14 @@ PrefabInstance:
       propertyPath: prewarm
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6934679206276565655, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d87e77d5a3364643b9219b335e8e471, type: 3}
+    - target: {fileID: 6934679206276565655, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d87e77d5a3364643b9219b335e8e471, type: 3}
     - target: {fileID: 9042103075001263237, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
       propertyPath: prewarm
       value: 0
