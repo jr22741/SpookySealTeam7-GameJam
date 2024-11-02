@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private bool gunActive = true;
+    [SerializeField] private bool gunActive;
 
     public void SetGunActive(bool active)
     {
