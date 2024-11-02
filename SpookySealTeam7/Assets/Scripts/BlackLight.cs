@@ -1,3 +1,4 @@
+using Ghost;
 using UnityEngine;
 
 public class BlackLight : MonoBehaviour
@@ -24,9 +25,10 @@ public class BlackLight : MonoBehaviour
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             int maxDist = 100;
             int layerMask = 1 << 7; // Only hit objects on the "Blacklight" layer (6)
-            if (Physics.Raycast(transform.position, fwd, maxDist, layerMask))
+            RaycastHit hitInfo;
+            if (Physics.Raycast(transform.position, fwd, out hitInfo, maxDist, layerMask))
             {
-                print("Blacklight has hit object!");
+                hitInfo.collider.gameObject.GetComponent<GhostAI>().ShineBlackLight();
             }
         }
     }

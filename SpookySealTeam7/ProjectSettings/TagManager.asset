@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Suck
   - Spiral
+  - Ghost
   layers:
   - Default
   - TransparentFX
@@ -15,6 +16,7 @@ TagManager:
   - UI
   - Ghost
   - Blacklight
+  - PlayerHidden
   - 
   - 
   - 
@@ -22,8 +24,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - InnerWalls
   - 
   - 
   - 

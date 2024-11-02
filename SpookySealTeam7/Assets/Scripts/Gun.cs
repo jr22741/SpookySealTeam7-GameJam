@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private ParticleSystem[] spirals;
     private float _rayLength;
     private bool _gunActive;
+    private float _attractionSpeed = 0f;
 
     public void SetGunActive(bool active)
     {
@@ -44,19 +45,33 @@ public class Gun : MonoBehaviour
             // Raycast from the gun to see if it hits anything
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             int maxDist = 100;
-            int layerMask = (1 << 6) + (1 << 7); // Only hit objects on the "Ghost" layer (6)
-            emission = suck.emission;
-            if (Physics.Raycast(transform.position, fwd, maxDist, layerMask))
+            int layerMask = (1 << 6) + (1 << 7); // Only hit objects on the "Ghost" layer (6) and the "BlackLight" layer (7)
+            RaycastHit hitInfo;
+            if (Physics.Raycast(transform.position, fwd, out hitInfo, maxDist, layerMask))
             {
-                print("Gun has hit object!");
                 emission.enabled = true;
+                
+                Vector3 ghostToGunVec = (transform.position - hitInfo.transform.position).normalized;
+                _attractionSpeed += 8f * Time.deltaTime;
+                hitInfo.transform.position += ghostToGunVec * (_attractionSpeed * Time.deltaTime);
+                
+                // If the ghost reaches the gun, destroy it
+                if (Vector3.Distance(hitInfo.transform.position, transform.position) < 0.6f)
+                {
+                    Destroy(hitInfo.collider.gameObject);
+                    if (GameObject.FindGameObjectsWithTag("Ghost").Length == 0)
+                    {
+                        print("All ghosts destroyed!");
+                    }
+                }
             }
             else
             {
                 emission.enabled = false;
+                _attractionSpeed = 0f;
             }
-        }
-        else
+        } 
+        else 
         {
             _rayLength = 0;
             emission = suck.emission;
@@ -66,6 +81,7 @@ public class Gun : MonoBehaviour
                 emission = spiral.emission;
                 emission.enabled = false;
             }
+            _attractionSpeed = 0f;
         }
     }
 }
