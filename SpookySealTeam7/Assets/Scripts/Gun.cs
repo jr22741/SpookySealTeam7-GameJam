@@ -1,7 +1,13 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    [SerializeField] private float extendSpeed = 1.0f;
+    [SerializeField] private float maxRayLength = 5.0f;
+    [SerializeField] private ParticleSystem suck;
+    [SerializeField] private ParticleSystem[] spirals;
+    private float _rayLength;
     private bool _gunActive;
     private float _attractionSpeed = 0f;
 
@@ -13,14 +19,29 @@ public class Gun : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        ParticleSystem.EmissionModule emission;
         if (_gunActive)
         {
+            // enable emission on spirals
+            foreach (var spiral in spirals)
+            {
+                emission = spiral.emission;
+                emission.enabled = true;
+                emission = spiral.emission;
+                emission.enabled = true;
+                // extend particle system over time
+                if (_rayLength < maxRayLength) _rayLength += extendSpeed * Time.deltaTime;
+                var shape = spiral.shape;
+                shape.position = new Vector3(shape.position.x, shape.position.y, _rayLength);
+                shape.length = _rayLength;
+            }
+            
             // Raycast from the gun to see if it hits anything
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             int maxDist = 100;
@@ -28,27 +49,38 @@ public class Gun : MonoBehaviour
             RaycastHit hitInfo;
             if (Physics.Raycast(transform.position, fwd, out hitInfo, maxDist, layerMask))
             {
+                emission.enabled = true;
+                
                 Vector3 ghostToGunVec = (transform.position - hitInfo.transform.position).normalized;
                 _attractionSpeed += 8f * Time.deltaTime;
                 hitInfo.transform.position += ghostToGunVec * (_attractionSpeed * Time.deltaTime);
                 
                 // If the ghost reaches the gun, destroy it
-                if (Vector3.Distance(hitInfo.transform.position, transform.position) < 0.1f)
+                if (Vector3.Distance(hitInfo.transform.position, transform.position) < 0.6f)
                 {
-                    hitInfo.collider.gameObject.SetActive(false);
+                    Destroy(hitInfo.collider.gameObject);
                     if (GameObject.FindGameObjectsWithTag("Ghost").Length == 0)
                     {
-                        Debug.Log("All ghosts destroyed!");
+                        print("All ghosts destroyed!");
                     }
                 }
             }
             else
             {
+                emission.enabled = false;
                 _attractionSpeed = 0f;
             }
         } 
         else 
         {
+            _rayLength = 0;
+            emission = suck.emission;
+            emission.enabled = false;
+            foreach (var spiral in spirals)
+            {
+                emission = spiral.emission;
+                emission.enabled = false;
+            }
             _attractionSpeed = 0f;
         }
     }

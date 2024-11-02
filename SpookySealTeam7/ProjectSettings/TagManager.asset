@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Suck
+  - Spiral
   - Ghost
   layers:
   - Default
@@ -22,7 +24,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - InnerWalls
   - 
   - 
   - 

@@ -1,108 +1,43 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Ghost
 {
+    [RequireComponent(typeof(NavMeshAgent))]
+    [RequireComponent(typeof(GhostMovement))]
+    [RequireComponent(typeof(GhostVisibility))]
+    [RequireComponent(typeof(GhostPanic))]
     public class GhostAI : MonoBehaviour
     {
-        private const int GameLayer = 6;
-        private const int BlackLightLayer = 7;
-        
-        private NavMeshAgent _navMeshAgent;
-        private Vector3 _lastPosition;
-        private bool _isFading;
-        private bool _isVisible = true;
-        private bool _isPanicking;
-        private float _standStillTimer;
+        private GhostMovement _ghostMovement;
+        private GhostVisibility _ghostVisibility;
+        private GhostPanic _ghostPanic;
 
-        [SerializeField] private float panicDuration = 5f;
-        [SerializeField] private float fadeDelay = 1f;
-        [SerializeField] private float wanderRadius = 10f;
-    
-        void Start()
+        private void Awake()
         {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-            _lastPosition = transform.position;
-            gameObject.layer = GameLayer;
+            _ghostMovement = GetComponent<GhostMovement>();
+            _ghostVisibility = GetComponent<GhostVisibility>();
+            _ghostPanic = GetComponent<GhostPanic>();
         }
 
-        void Update()
+        private void Update()
         {
-            if (_isPanicking)
+            if (_ghostMovement.IsStandingStill())
             {
-                Move();
-            }
-            
-            if (Vector3.Distance(transform.position, _lastPosition) > 0.001f)
-            {
-                _standStillTimer = 0f;
-                _isFading = false;
-                _isVisible = true;
-                gameObject.layer = GameLayer;
+                _ghostVisibility.StandStill();
             }
             else
             {
-                _standStillTimer += Time.deltaTime;
-
-                if (_standStillTimer >= fadeDelay && !_isFading && !_isPanicking)
-                {
-                    StandStill();
-                }
+                _ghostVisibility.ResetVisibility();
             }
-
-            _lastPosition = transform.position;
-        }
-
-        void StandStill()
-        {
-            if (_isVisible && !_isFading)
-            {
-                StartCoroutine(FadeOutAndChangeLayer());
-            }
-        }
-
-        void Move()
-        {
-            Vector3 randomDirection = Random.insideUnitSphere * wanderRadius; 
-            randomDirection.y = 0;
-
-            if (NavMesh.SamplePosition(randomDirection, out var hit, 10.0f, NavMesh.AllAreas))
-            {
-                _navMeshAgent.SetDestination(hit.position);
-            }
-        }
-
-        IEnumerator Panic()
-        {
-            yield return new WaitForSeconds(1f);
-            _isPanicking = true;
-            yield return new WaitForSeconds(panicDuration);
-            _isPanicking = false;
         }
 
         public void ShineBlackLight()
         {
-            _isFading = false;
-            _standStillTimer = 0f;
-            _isVisible = true;
-            
-            StartCoroutine(Panic());
+            _ghostVisibility.ResetVisibility();
+            _ghostMovement.Move();
         }
-    
-        private IEnumerator FadeOutAndChangeLayer()
-        {
-            _isFading = true;
-            float elapsedTime = 0f;
-
-            while (elapsedTime < fadeDelay && _isFading)
-            {
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-            gameObject.layer = BlackLightLayer;
-            _isVisible = false;
-        }
+        
+        
     }
 }
