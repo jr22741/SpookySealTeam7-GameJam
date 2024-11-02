@@ -1,8 +1,10 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private CharacterController _controller;
+    private Gun _gun;
+    private BlackLight _light;
     private Vector3 _playerVelocity;
     private Vector3 _rotation;
     private bool _groundedPlayer;
@@ -16,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         _controller = gameObject.AddComponent<CharacterController>();
+        _gun = gameObject.GetComponentInChildren<Gun>();
+        _light = gameObject.GetComponentInChildren<BlackLight>();
         _rotation = transform.localEulerAngles;
     }
 
@@ -44,5 +48,24 @@ public class PlayerMovement : MonoBehaviour
 
         _playerVelocity.y += gravityValue * Time.deltaTime;
         _controller.Move(_playerVelocity * Time.deltaTime);
+        
+        // head rotation
+        float v = Input.GetAxis("Mouse Y") * (Time.deltaTime * mouseSpeed);
+        _rotation.x -= v;
+        _rotation.x = Mathf.Clamp(_rotation.x, -90.0f, 90.0f);
+        transform.localEulerAngles = _rotation;
+        
+        // OTHER INPUTS
+        if (Input.GetAxis("Fire1").Equals(1.0f)) {
+            _gun.SetGunActive(true);
+        } else {
+            _gun.SetGunActive(false);
+        }
+
+        if (Input.GetAxis("Fire2").Equals(1.0f)) {
+            _light.SetLightActive(true);
+        } else {
+            _light.SetLightActive(false);
+        }
     }
 }
