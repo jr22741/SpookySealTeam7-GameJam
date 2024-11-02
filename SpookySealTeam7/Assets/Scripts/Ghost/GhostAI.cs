@@ -16,7 +16,7 @@ namespace Ghost
         private bool _isPanicking;
         private float _standStillTimer;
 
-        [SerializeField] private float panicDuration = 1f;
+        [SerializeField] private float panicDuration = 5f;
         [SerializeField] private float fadeDelay = 1f;
         [SerializeField] private float wanderRadius = 10f;
     
@@ -25,7 +25,6 @@ namespace Ghost
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _lastPosition = transform.position;
             gameObject.layer = GameLayer;
-            StartCoroutine(Panic());
         }
 
         void Update()
@@ -68,7 +67,7 @@ namespace Ghost
             Vector3 randomDirection = Random.insideUnitSphere * wanderRadius; 
             randomDirection.y = 0;
 
-            if (NavMesh.SamplePosition(randomDirection, out var hit, 1.0f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomDirection, out var hit, 10.0f, NavMesh.AllAreas))
             {
                 _navMeshAgent.SetDestination(hit.position);
             }
@@ -87,7 +86,7 @@ namespace Ghost
             _isFading = false;
             _standStillTimer = 0f;
             _isVisible = true;
-
+            
             StartCoroutine(Panic());
         }
     
