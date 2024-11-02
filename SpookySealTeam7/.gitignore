@@ -77,3 +77,7 @@ crashlytics-build.properties
 
 *.blend
 *.blend1
+*.blend.meta
+*.blend1.meta
+
+**/.DS_Store
