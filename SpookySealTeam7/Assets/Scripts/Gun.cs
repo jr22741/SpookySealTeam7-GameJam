@@ -26,14 +26,22 @@ public class Gun : MonoBehaviour
             int maxDist = 100;
             int layerMask = (1 << 6) + (1 << 7); // Only hit objects on the "Ghost" layer (6) and the "BlackLight" layer (7)
             RaycastHit hitInfo;
-            print("casting ray");
             if (Physics.Raycast(transform.position, fwd, out hitInfo, maxDist, layerMask))
             {
-                print("Gun has hit object!");
                 Vector3 ghostToGunVec = (transform.position - hitInfo.transform.position).normalized;
                 _attractionSpeed += 8f * Time.deltaTime;
                 hitInfo.transform.position += ghostToGunVec * (_attractionSpeed * Time.deltaTime);
-            } 
+                
+                // If the ghost reaches the gun, destroy it
+                if (Vector3.Distance(hitInfo.transform.position, transform.position) < 0.1f)
+                {
+                    hitInfo.collider.gameObject.SetActive(false);
+                    if (GameObject.FindGameObjectsWithTag("Ghost").Length == 0)
+                    {
+                        Debug.Log("All ghosts destroyed!");
+                    }
+                }
+            }
             else
             {
                 _attractionSpeed = 0f;
