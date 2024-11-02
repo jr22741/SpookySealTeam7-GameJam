@@ -74,3 +74,5 @@ crashlytics-build.properties
 # Rider
 **/.idea
 **/.vscode
+
+*.blend
