@@ -33,12 +33,12 @@ public class Gun : MonoBehaviour
                 hitInfo.transform.position += ghostToGunVec * (_attractionSpeed * Time.deltaTime);
                 
                 // If the ghost reaches the gun, destroy it
-                if (Vector3.Distance(hitInfo.transform.position, transform.position) < 0.1f)
+                if (Vector3.Distance(hitInfo.transform.position, transform.position) < 0.6f)
                 {
-                    hitInfo.collider.gameObject.SetActive(false);
+                    Destroy(hitInfo.collider.gameObject);
                     if (GameObject.FindGameObjectsWithTag("Ghost").Length == 0)
                     {
-                        Debug.Log("All ghosts destroyed!");
+                        print("All ghosts destroyed!");
                     }
                 }
             }
