@@ -242,8 +242,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26457e535d3242bbba9088e3dafa315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newLayer: 6
+  panicDuration: 1
+  gameLayer: 6
+  blackLightLayer: 7
   fadeDelay: 1
+  wanderRadius: 10
 --- !u!1 &116629209 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: c8f6a39fd11722e4d851662896dcebb2, type: 3}
@@ -333,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c8f6a39fd11722e4d851662896dcebb2, type: 3}
       propertyPath: m_Name
-      value: house
+      value: House
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -690,7 +693,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 65
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -730,7 +733,7 @@ GameObject:
   - component: {fileID: 1984245693}
   - component: {fileID: 1984245692}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
