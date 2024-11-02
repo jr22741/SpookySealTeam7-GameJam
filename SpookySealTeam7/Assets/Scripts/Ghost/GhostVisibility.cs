@@ -12,11 +12,13 @@ namespace Ghost
         private bool _isVisible = true;
         private float _standStillTimer;
 
+        [SerializeField] private GameObject model;
         [SerializeField] private float fadeDelay = 1f;
 
         private void Start()
         {
             gameObject.layer = GameLayer;
+            model.layer = GameLayer;
         }
 
         public void StandStill()
@@ -33,6 +35,7 @@ namespace Ghost
             _standStillTimer = 0f;
             _isVisible = true;
             gameObject.layer = GameLayer;
+            model.layer = GameLayer;
         }
 
         private IEnumerator FadeOutAndChangeLayer()
@@ -47,6 +50,7 @@ namespace Ghost
             }
 
             gameObject.layer = BlackLightLayer;
+            model.layer = BlackLightLayer;
             _isVisible = false;
         }
     }
