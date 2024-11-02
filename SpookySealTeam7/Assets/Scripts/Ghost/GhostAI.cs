@@ -67,9 +67,8 @@ namespace Ghost
         {
             Vector3 randomDirection = Random.insideUnitSphere * wanderRadius; 
             randomDirection.y = 0;
-            
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(randomDirection, out hit, 1.0f, NavMesh.AllAreas))
+
+            if (NavMesh.SamplePosition(randomDirection, out var hit, 1.0f, NavMesh.AllAreas))
             {
                 _navMeshAgent.SetDestination(hit.position);
             }

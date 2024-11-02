@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 54780044}
   - component: {fileID: 54780043}
   - component: {fileID: 54780047}
+  - component: {fileID: 54780048}
   m_Layer: 6
   m_Name: Ghost
   m_TagString: Untagged
@@ -243,10 +244,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panicDuration: 1
-  gameLayer: 6
-  blackLightLayer: 7
   fadeDelay: 1
   wanderRadius: 10
+--- !u!195 &54780048
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54780042}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 1
 --- !u!1 &116629209 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: c8f6a39fd11722e4d851662896dcebb2, type: 3}
