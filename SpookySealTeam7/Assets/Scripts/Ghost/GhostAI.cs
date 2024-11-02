@@ -1,25 +1,30 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Ghost
 {
     public class GhostAI : MonoBehaviour
     {
+        private const int GameLayer = 6;
+        private const int BlackLightLayer = 7;
+        
+        private NavMeshAgent _navMeshAgent;
         private Vector3 _lastPosition;
         private bool _isFading;
         private bool _isVisible = true;
         private bool _isPanicking;
         private float _standStillTimer;
 
-        public float panicSpeed = 8f;
-        public float panicDuration = 1f;
-        public int gameLayer;
-        public int blackLightLayer = 7; 
-        public float fadeDelay = 1f;
+        [SerializeField] private float panicDuration = 1f;
+        [SerializeField] private float fadeDelay = 1f;
+        [SerializeField] private float wanderRadius = 10f;
     
         void Start()
         {
+            _navMeshAgent = GetComponent<NavMeshAgent>();
             _lastPosition = transform.position;
+            gameObject.layer = GameLayer;
             StartCoroutine(Panic());
         }
 
@@ -35,7 +40,7 @@ namespace Ghost
                 _standStillTimer = 0f;
                 _isFading = false;
                 _isVisible = true;
-                gameObject.layer = gameLayer;
+                gameObject.layer = GameLayer;
             }
             else
             {
@@ -60,12 +65,14 @@ namespace Ghost
 
         void Move()
         {
-            //TODO: Implement the movement logic for the ghost when it is panicking
-            Vector3 randomDirection = Random.insideUnitSphere; 
-            randomDirection.y = 0; 
-            randomDirection.Normalize();
-
-            transform.position += randomDirection * (panicSpeed * Time.deltaTime);
+            Vector3 randomDirection = Random.insideUnitSphere * wanderRadius; 
+            randomDirection.y = 0;
+            
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomDirection, out hit, 1.0f, NavMesh.AllAreas))
+            {
+                _navMeshAgent.SetDestination(hit.position);
+            }
         }
 
         IEnumerator Panic()
@@ -96,7 +103,7 @@ namespace Ghost
                 yield return null;
             }
 
-            gameObject.layer = blackLightLayer;
+            gameObject.layer = BlackLightLayer;
             _isVisible = false;
         }
     }
