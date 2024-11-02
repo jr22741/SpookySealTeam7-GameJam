@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Light : MonoBehaviour
 {
-    private bool _gunActive;
-
-    public void SetGunActive(bool active)
+    private bool _lightActive;
+    
+    public void SetLightActive(bool active) 
     {
-        _gunActive = active;
+        _lightActive = active;
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -18,15 +18,15 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_gunActive)
+        if (_lightActive)
         {
-            // Raycast from the gun to see if it hits anything
+            // Raycast from the light to see if it hits anything
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             int maxDist = 100;
-            int layerMask = 1 << 6; // Only hit objects on the "Ghost" layer (6)
+            int layerMask = 1 << 7; // Only hit objects on the "Blacklight" layer (6)
             if (Physics.Raycast(transform.position, fwd, maxDist, layerMask))
             {
-                print("Gun has hit object!");
+                print("Blacklight has hit object!");
             }
         }
     }
