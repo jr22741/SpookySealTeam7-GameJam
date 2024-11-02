@@ -5,9 +5,9 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController _controller;
     private Vector3 _playerVelocity;
     private bool _groundedPlayer;
-    public float _playerSpeed = 2.0f;
-    public float _jumpHeight = 1.0f;
-    public float _gravityValue = -9.81f;
+    [SerializeField] private float playerSpeed = 5.0f;
+    [SerializeField] private float jumpHeight = 1.0f;
+    [SerializeField] private float gravityValue = -9.81f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,20 +25,15 @@ public class PlayerMovement : MonoBehaviour
         }
         
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        _controller.Move(move * (Time.deltaTime * _playerSpeed));
-        
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.forward = move;
-        }
+        _controller.Move(move * (Time.deltaTime * playerSpeed));
 
         // Makes the player jump
         if (Input.GetButtonDown("Jump") && _groundedPlayer)
         {
-            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -2.0f * _gravityValue);
+            _playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
         }
 
-        _playerVelocity.y += _gravityValue * Time.deltaTime;
+        _playerVelocity.y += gravityValue * Time.deltaTime;
         _controller.Move(_playerVelocity * Time.deltaTime);
     }
 }
