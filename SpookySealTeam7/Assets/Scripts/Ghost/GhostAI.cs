@@ -23,8 +23,8 @@ namespace Ghost
 
         private void Start()
         {
-            // StartCoroutine(InitialScatter());
-            // StartCoroutine(PeriodicallyScatter());
+            StartCoroutine(InitialScatter());
+            StartCoroutine(PeriodicallyScatter());
         }
 
         private void Update()
@@ -57,8 +57,11 @@ namespace Ghost
             {
                 float waitTime = Random.Range(25f, 50f);
                 yield return new WaitForSeconds(waitTime);
-                _ghostVisibility.ResetVisibility();
-                _ghostMovement.Move();
+                if (_ghostMovement.IsStandingStill())
+                {
+                    _ghostVisibility.ResetVisibility();
+                    _ghostMovement.Move();
+                }
             }
         }
 
