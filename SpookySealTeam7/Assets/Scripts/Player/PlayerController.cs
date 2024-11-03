@@ -12,6 +12,7 @@ public class PlayerController : NetworkBehaviour {
         private Vector3 _playerVelocity;
         private Vector3 _rotation;
         private Vector3 _camRotation;
+        private GameObject _menus;
         private bool _grounded;
         private bool _paused;
         [SerializeField] private float playerSpeed = 5.0f;
@@ -31,14 +32,18 @@ public class PlayerController : NetworkBehaviour {
             _rotation = transform.localEulerAngles;
             _camRotation = _cam.transform.localEulerAngles;
             _transform = GetComponent<ClientNetworkTransform>();
+            _menus = GameObject.Find("Menus");
 
             if (!IsOwner)
             {
                 return;
             }
 
+            _menus.GetComponent<CanvasGroup>().alpha = 0;
+            _menus.GetComponent<CanvasGroup>().interactable = false;
+
             GameObject camera = GameObject.Find("MainCamera");
-            camera.transform.SetParent(gameObject.transform);
+            camera.transform.SetParent(_cam.transform);
             camera.transform.position = _cam.transform.position;
             camera.transform.rotation = _cam.transform.rotation;
             
@@ -57,6 +62,9 @@ public class PlayerController : NetworkBehaviour {
             {
                 // Invert cursor lock status and pause
                 Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
+                _menus.GetComponent<CanvasGroup>().alpha = (_menus.GetComponent<CanvasGroup>().alpha == 0) ? 1 : 0;
+                _menus.GetComponent<CanvasGroup>().interactable = !_menus.GetComponent<CanvasGroup>().interactable;
+
                 _paused = !_paused;
             }
             
