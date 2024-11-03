@@ -4063,6 +4063,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9311617b76dd8d049b198314d66ddeb5, type: 3}
+--- !u!114 &1176621310 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9170661854068162881, guid: 56445f4188062184b9ae073311d721d9, type: 3}
+  m_PrefabInstance: {fileID: 1261538578}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1177871615 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7431666735180143259, guid: 9311617b76dd8d049b198314d66ddeb5, type: 3}
@@ -4719,6 +4730,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1160987794120240023, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: suckBar
+      value: 
+      objectReference: {fileID: 1176621310}
     - target: {fileID: 1809074286074033939, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
       propertyPath: m_Name
       value: Bolt
@@ -5074,10 +5089,6 @@ PrefabInstance:
     - target: {fileID: 5308280549255324853, guid: 7e3910d5d27902d438c51e5c6412fa17, type: 3}
       propertyPath: m_Name
       value: Ghost
-      objectReference: {fileID: 0}
-    - target: {fileID: 5676809017673101207, guid: 7e3910d5d27902d438c51e5c6412fa17, type: 3}
-      propertyPath: fadeDelay
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

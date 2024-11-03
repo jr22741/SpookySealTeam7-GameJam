@@ -27555,14 +27555,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1bcb20a84d20544ebb4cb1fd589176c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extendSpeed: 10
-  maxRayLength: 10
-  acceleration: 16
+  extendSpeed: 20
+  maxRayLength: 20
+  acceleration: 30
   suck: {fileID: 3735354920499892407}
   bolts:
   - {fileID: 2589196744702019283}
   - {fileID: 1824469721381913726}
   - {fileID: 9042103075001263237}
+  suckBar: {fileID: 0}
+  suckAmount: 100
+  maxSuck: 100
+  counter: 0
 --- !u!1 &9201455199615206954
 GameObject:
   m_ObjectHideFlags: 0
