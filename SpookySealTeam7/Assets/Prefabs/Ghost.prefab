@@ -96,10 +96,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2754631024297304126}
   - component: {fileID: 8457657756939190265}
-  - component: {fileID: 3436921705250742476}
   - component: {fileID: 6524669762784044043}
-  - component: {fileID: 4884135340244741378}
   - component: {fileID: 5676809017673101207}
+  - component: {fileID: 675339411904497146}
+  - component: {fileID: 1716834189683216607}
   m_Layer: 6
   m_Name: Ghost
   m_TagString: Ghost
@@ -146,20 +146,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3436921705250742476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5308280549255324853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c26457e535d3242bbba9088e3dafa315, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  modelTransform: {fileID: 5945766940745236842}
 --- !u!195 &6524669762784044043
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -182,19 +168,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 5
   m_ObstacleAvoidanceType: 3
---- !u!114 &4884135340244741378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5308280549255324853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f818b9207a7433e92fefd63eeecdbf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wanderRadius: 50
 --- !u!114 &5676809017673101207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,3 +182,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 4133641228411730784}
   fadeDelay: 1
+--- !u!114 &675339411904497146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5308280549255324853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26457e535d3242bbba9088e3dafa315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  modelTransform: {fileID: 5945766940745236842}
+--- !u!114 &1716834189683216607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5308280549255324853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f818b9207a7433e92fefd63eeecdbf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderRadius: 50
