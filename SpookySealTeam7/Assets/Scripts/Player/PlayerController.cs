@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private bool _grounded;
     private float groundedTimer;
     private bool _paused;
+
     [SerializeField] private float playerSpeed = 5.0f;
     [SerializeField] private float mouseSpeed = 100.0f;
     [SerializeField] private float jumpHeight = 1.0f;
