@@ -3,12 +3,18 @@ using UnityEngine;
 
 public class BlackLight : MonoBehaviour
 {
+    [SerializeField] private float lightRadius = 5.0f;
     private bool _lightActive;
     private Light _lantern;
     
     public void SetLightActive(bool active) 
     {
         _lightActive = active;
+    }
+
+    public bool GetLightActive()
+    {
+        return _lightActive;
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,14 +32,16 @@ public class BlackLight : MonoBehaviour
             // enable lantern
             _lantern.gameObject.SetActive(true);
             
-            // Raycast from the light to see if it hits anything
-            Vector3 fwd = transform.TransformDirection(Vector3.forward);
-            int maxDist = 100;
+            // Check spherical area around the light to see if it hits anything
             int layerMask = 1 << 7; // Only hit objects on the "Blacklight" layer (7)
-            RaycastHit hitInfo;
-            if (Physics.Raycast(transform.position, fwd, out hitInfo, maxDist, layerMask))
+            Collider[] ghosts = Physics.OverlapSphere(transform.position, lightRadius, layerMask);
+            foreach(Collider ghost in ghosts)
             {
-                hitInfo.collider.gameObject.GetComponent<GhostAI>().ShineBlackLight();
+                // if nothing is in the way
+                if (!Physics.Linecast(transform.position, ghost.transform.position, (1 << 16)))
+                {
+                    ghost.gameObject.GetComponent<GhostAI>().ShineBlackLight();
+                }
             }
         }
         else

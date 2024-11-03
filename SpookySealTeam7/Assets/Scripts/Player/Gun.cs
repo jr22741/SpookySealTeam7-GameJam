@@ -23,7 +23,7 @@ public class Gun : MonoBehaviour
     public void SetGunActive(bool active)
     {
         if ((_gunActive && !active) || (!_gunActive && active)) {
-            if (counter > 10) {
+            if (counter > 5) {
                 _gunActive = active && (suckAmount > 0);
             } else {
                 counter++;
@@ -33,6 +33,11 @@ public class Gun : MonoBehaviour
         } else {
             _gunActive = active && (suckAmount > 0);
         }
+    }
+
+    public bool GetGunActive()
+    {
+        return _gunActive;
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -60,7 +65,7 @@ public class Gun : MonoBehaviour
         {
 
             //edit suck stamina
-            suckAmount -= 0.5f;
+            suckAmount -= 25.0f *Time.deltaTime;
             if (suckAmount < 0) suckAmount = 0;
 
             if (suckAmount > 10) {
@@ -114,7 +119,7 @@ public class Gun : MonoBehaviour
         else 
         {
 
-            suckAmount += 0.5f;
+            suckAmount += 20.0f * Time.deltaTime;
             if (suckAmount > maxSuck) suckAmount = maxSuck;
 
             _rayLength = 0;

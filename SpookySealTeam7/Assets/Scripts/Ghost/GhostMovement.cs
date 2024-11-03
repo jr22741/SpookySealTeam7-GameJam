@@ -19,11 +19,10 @@ namespace Ghost
         public void Move()
         {
             Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
-            randomDirection.y = 6;
+            randomDirection.y = Random.Range(0, 2) == 0 ? 1 : 6;
 
             if (NavMesh.SamplePosition(randomDirection, out var hit, wanderRadius, NavMesh.AllAreas))
             {
-                print(hit.position.y);
                 _navMeshAgent.SetDestination(hit.position);
             }
         }
