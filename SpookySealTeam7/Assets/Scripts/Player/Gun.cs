@@ -36,7 +36,7 @@ public class Gun : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         ParticleSystem.EmissionModule emission;
         if (_gunActive)
