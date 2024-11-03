@@ -4863,6 +4863,7 @@ GameObject:
   - component: {fileID: 2948101999423525033}
   - component: {fileID: 95374594847037498}
   - component: {fileID: 2946007408698247372}
+  - component: {fileID: 9059491046222168848}
   - component: {fileID: 4238024202282157670}
   - component: {fileID: 7836392874006390320}
   m_Layer: 0
@@ -4966,6 +4967,31 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9059491046222168848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839744528505950418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3358778246
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &4238024202282157670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4978,6 +5004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31cb372a7a6fc150ca96a01c865e2bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   playerSpeed: 5
   mouseSpeed: 100
   jumpHeight: 1
@@ -9938,7 +9965,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2413108597422492427}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &7995159899946849444
 MonoBehaviour:
   m_ObjectHideFlags: 0
