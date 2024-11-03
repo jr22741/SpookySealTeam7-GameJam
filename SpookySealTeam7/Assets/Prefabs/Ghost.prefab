@@ -100,7 +100,6 @@ GameObject:
   - component: {fileID: 6524669762784044043}
   - component: {fileID: 4884135340244741378}
   - component: {fileID: 5676809017673101207}
-  - component: {fileID: 63403862933253209}
   m_Layer: 6
   m_Name: Ghost
   m_TagString: Ghost
@@ -159,6 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26457e535d3242bbba9088e3dafa315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  modelTransform: {fileID: 5945766940745236842}
 --- !u!195 &6524669762784044043
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -208,16 +209,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 4133641228411730784}
   fadeDelay: 1
---- !u!114 &63403862933253209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5308280549255324853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d958b025b054445a5cf414b9f6ef3bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panicDuration: 5

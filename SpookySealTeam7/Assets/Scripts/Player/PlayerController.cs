@@ -6,10 +6,11 @@ public class PlayerController : MonoBehaviour
     private GameObject _cam;
     private Gun _gun;
     private BlackLight _light;
-    private Vector3 _playerVelocity;
+    private float _verticalVelocity;
     private Vector3 _rotation;
     private Vector3 _camRotation;
     private bool _grounded;
+    private float groundedTimer;
     private bool _paused;
     [SerializeField] private float playerSpeed = 5.0f;
     [SerializeField] private float mouseSpeed = 100.0f;
@@ -42,28 +43,42 @@ public class PlayerController : MonoBehaviour
         // Ignore movement if paused
         if (_paused) return;
         
+        // grounded timer to not infinitely jump
         _grounded = _controller.isGrounded;
-        if (_grounded && _playerVelocity.y < 0)
+        if (_grounded)
         {
-            _playerVelocity.y = 0f;
+            groundedTimer = 0.2f;
+        }
+        if (groundedTimer > 0)
+        {
+            groundedTimer -= Time.deltaTime;
+        }
+        if (_grounded && _verticalVelocity < 0)
+        {
+            _verticalVelocity = 0f;
         }
         
+        // gravity
+        _verticalVelocity += gravityValue * Time.deltaTime;
+        
+        // input
         Vector3 move = transform.rotation * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        _controller.Move(move * (Time.deltaTime * playerSpeed));
 
         // player jump
-        if (Input.GetButtonDown("Jump") && _grounded)
+        if (Input.GetButtonDown("Jump") && groundedTimer > 0)
         {
-            _playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
+            groundedTimer = 0;
+            _verticalVelocity += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
         }
+        
+        move.y = _verticalVelocity;
+        _controller.Move(move * (Time.deltaTime * playerSpeed));
+        
         
         // player rotation
         float h = Input.GetAxis("Mouse X") * (Time.deltaTime * mouseSpeed);
         _rotation.y += h;
         transform.localEulerAngles = _rotation;
-
-        _playerVelocity.y += gravityValue * Time.deltaTime;
-        _controller.Move(_playerVelocity * Time.deltaTime);
         
         // camera rotation
         float v = Input.GetAxis("Mouse Y") * (Time.deltaTime * mouseSpeed);
