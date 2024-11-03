@@ -5463,7 +5463,7 @@ MonoBehaviour:
   _cam: {fileID: 2413108597422492427}
   playerSpeed: 5
   mouseSpeed: 100
-  jumpHeight: 1
+  jumpHeight: 0.25
   gravityValue: -9.81
 --- !u!114 &-7179765161489787314
 MonoBehaviour:
@@ -15747,6 +15747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42b8c1cf13fa82c7e8cbc84bbff2f27d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightRadius: 5
 --- !u!1 &4612018458433186149
 GameObject:
   m_ObjectHideFlags: 0
@@ -16136,7 +16137,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 100
-  m_Range: 20
+  m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10

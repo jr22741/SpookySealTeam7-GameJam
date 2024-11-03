@@ -71,29 +71,42 @@ public class PlayerController : NetworkBehaviour {
             // Ignore movement if paused
             if (_paused) return;
             
-            _grounded = _controller.isGrounded;
-            if (_grounded && _playerVelocity.y < 0)
+             _grounded = _controller.isGrounded;
+            if (_grounded)
             {
-                _playerVelocity.y = 0f;
+                groundedTimer = 0.2f;
+            }
+            if (groundedTimer > 0)
+            {
+                groundedTimer -= Time.deltaTime;
+            }
+            if (_grounded && _verticalVelocity < 0)
+            {
+                _verticalVelocity = 0f;
             }
             
+            // gravity
+            _verticalVelocity += gravityValue * Time.deltaTime;
+            
+            // input
             Vector3 move = transform.rotation * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            _controller.Move(move * (Time.deltaTime * playerSpeed));
 
             // player jump
-            if (Input.GetButtonDown("Jump") && _grounded)
+            if (Input.GetButtonDown("Jump") && groundedTimer > 0)
             {
-                _playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
+                groundedTimer = 0;
+                _verticalVelocity += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
             }
+            
+            move.y = _verticalVelocity;
+            _controller.Move(move * (Time.deltaTime * playerSpeed));
+            
             
             // player rotation
             float h = Input.GetAxis("Mouse X") * (Time.deltaTime * mouseSpeed);
             _rotation.y += h;
-
-            _playerVelocity.y += gravityValue * Time.deltaTime;
+            transform.localEulerAngles = _rotation;
             
-            MoveServerRpc(_rotation, _playerVelocity);
-
             // camera rotation
             float v = Input.GetAxis("Mouse Y") * (Time.deltaTime * mouseSpeed);
             _camRotation.x -= v;
@@ -101,18 +114,15 @@ public class PlayerController : NetworkBehaviour {
             _cam.transform.localEulerAngles = _camRotation;
             
             // OTHER INPUTS
-            if (!Input.GetAxis("Fire1").Equals(0.0f)) {
+            if (!Input.GetAxis("Fire1").Equals(0.0f) && !_light.GetLightActive()) {
                 _gun.SetGunActive(true);
-            } else {
-                _gun.SetGunActive(false);
-            }
-
-            if (!Input.GetAxis("Fire2").Equals(0.0f)) {
+            } else if (!Input.GetAxis("Fire2").Equals(0.0f) && !_gun.GetGunActive()) {
                 _light.SetLightActive(true);
             } else {
                 _light.SetLightActive(false);
+                _gun.SetGunActive(false);
             }
-            
+                
         }
 
         [ServerRpc]

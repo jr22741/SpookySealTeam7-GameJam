@@ -16,6 +16,11 @@ public class Gun : MonoBehaviour
     {
         _gunActive = active;
     }
+
+    public bool GetGunActive()
+    {
+        return _gunActive;
+    }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
