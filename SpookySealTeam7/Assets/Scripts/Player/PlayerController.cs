@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject gameOver;
     private CharacterController _controller;
     private GameObject _cam;
     private Gun _gun;
@@ -23,6 +24,13 @@ public class PlayerController : MonoBehaviour
     public void SetPaused(bool paused)
     {
         _paused = paused;
+    }
+
+    public void GameOver()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        SetPaused(true);
+        gameOver.gameObject.SetActive(true);
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
