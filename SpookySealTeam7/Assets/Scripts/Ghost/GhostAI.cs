@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,8 +23,8 @@ namespace Ghost
 
         private void Start()
         {
-            StartCoroutine(InitialScatter());
-            StartCoroutine(PeriodicallyScatter());
+            // StartCoroutine(InitialScatter());
+            // StartCoroutine(PeriodicallyScatter());
         }
 
         private void Update()

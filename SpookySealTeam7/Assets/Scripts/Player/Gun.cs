@@ -54,7 +54,7 @@ public class Gun : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         //edit suckbar
         suckBar.fillAmount = suckAmount / maxSuck;
