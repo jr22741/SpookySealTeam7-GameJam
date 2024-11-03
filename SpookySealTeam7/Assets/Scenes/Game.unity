@@ -5433,33 +5433,65 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1809074286074033939, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: m_Name
+      value: Bolt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809074286074033939, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: m_TagString
+      value: Bolt
+      objectReference: {fileID: 0}
     - target: {fileID: 1824469721381913726, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
       propertyPath: prewarm
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1824469721381913726, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: InheritVelocityModule.enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1839744528505950418, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1862027633799050483, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: m_Name
+      value: Bolt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1862027633799050483, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: m_TagString
+      value: Bolt
+      objectReference: {fileID: 0}
     - target: {fileID: 2589196744702019283, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
       propertyPath: prewarm
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589196744702019283, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: InheritVelocityModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285876998556522807, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: m_Name
+      value: Bolt
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285876998556522807, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: m_TagString
+      value: Bolt
+      objectReference: {fileID: 0}
+    - target: {fileID: 3735354920499892407, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: InheritVelocityModule.enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5901422769347572570, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6934679206276565655, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
-      propertyPath: m_Resource
-      value: 
-      objectReference: {fileID: 8300000, guid: 4d87e77d5a3364643b9219b335e8e471, type: 3}
-    - target: {fileID: 6934679206276565655, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4d87e77d5a3364643b9219b335e8e471, type: 3}
     - target: {fileID: 9042103075001263237, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
       propertyPath: prewarm
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042103075001263237, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: InheritVelocityModule.enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6079,18 +6111,6 @@ PrefabInstance:
     - target: {fileID: 6245626354962730415, guid: e198a3f63d723774dae4517c3012cf15, type: 3}
       propertyPath: m_Layer
       value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 7028004170547576136, guid: e198a3f63d723774dae4517c3012cf15, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7028004170547576136, guid: e198a3f63d723774dae4517c3012cf15, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7028004170547576136, guid: e198a3f63d723774dae4517c3012cf15, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7028004170547576136, guid: e198a3f63d723774dae4517c3012cf15, type: 3}
       propertyPath: m_LocalPosition.x
