@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using Unity.Netcode;
+using System.Collections;
 
 namespace Ghost
 {
@@ -42,6 +43,29 @@ namespace Ghost
             else
             {
                 _ghostVisibility.ResetVisibility();
+            }
+        }
+
+        private IEnumerator InitialScatter()
+        {
+            if (IsServer) {
+                yield return new WaitForSeconds(1f);
+                _ghostVisibility.ResetVisibility();
+                _ghostMovement.Move();
+            }
+
+        }
+
+        private IEnumerator PeriodicallyScatter()
+        {   
+            if (IsServer) {
+                while (true)
+                {
+                    float waitTime = Random.Range(25f, 50f);
+                    yield return new WaitForSeconds(waitTime);
+                    _ghostVisibility.ResetVisibility();
+                    _ghostMovement.Move();
+                }
             }
         }
 

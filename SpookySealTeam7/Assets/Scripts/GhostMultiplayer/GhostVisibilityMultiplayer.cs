@@ -52,8 +52,7 @@ namespace Ghost
                 yield return null;
             }
 
-            gameObject.layer = BlackLightLayer;
-            model.layer = BlackLightLayer;
+            VisibilityServerRpc();
             _isVisible = false;
         }
 
