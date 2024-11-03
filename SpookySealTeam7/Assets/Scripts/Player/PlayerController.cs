@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private GameObject pauseMenu;
     private CharacterController _controller;
     private GameObject _cam;
     private Gun _gun;
@@ -18,6 +19,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mouseSpeed = 100.0f;
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = -9.81f;
+
+    public void SetPaused(bool paused)
+    {
+        _paused = paused;
+    }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,6 +35,7 @@ public class PlayerController : MonoBehaviour
         _light = gameObject.GetComponentInChildren<BlackLight>();
         _rotation = transform.localEulerAngles;
         _camRotation = _cam.transform.localEulerAngles;
+        pauseMenu.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,6 +47,14 @@ public class PlayerController : MonoBehaviour
             // Invert cursor lock status and pause
             Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
             _paused = !_paused;
+            if (_paused)
+            {
+                pauseMenu.gameObject.SetActive(true);   
+            }
+            else
+            {
+                pauseMenu.gameObject.SetActive(false);
+            }
         }
         
         // Ignore movement if paused
