@@ -23,7 +23,6 @@ namespace Ghost
 
             if (NavMesh.SamplePosition(randomDirection, out var hit, wanderRadius, NavMesh.AllAreas))
             {
-                print(hit.position.y);
                 _navMeshAgent.SetDestination(hit.position);
             }
         }
