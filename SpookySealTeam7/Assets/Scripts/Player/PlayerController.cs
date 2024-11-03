@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _camRotation;
     private bool _grounded;
     private bool _paused;
+
     [SerializeField] private float playerSpeed = 5.0f;
     [SerializeField] private float mouseSpeed = 100.0f;
     [SerializeField] private float jumpHeight = 1.0f;
@@ -77,7 +79,6 @@ public class PlayerController : MonoBehaviour
         } else {
             _gun.SetGunActive(false);
         }
-
         if (!Input.GetAxis("Fire2").Equals(0.0f)) {
             _light.SetLightActive(true);
         } else {
