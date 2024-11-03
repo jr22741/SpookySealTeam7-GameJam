@@ -3,13 +3,18 @@ using UnityEngine;
 
 public class BlackLight : MonoBehaviour
 {
-    [SerializeField] private float lightRadius = 10.0f;
+    [SerializeField] private float lightRadius = 5.0f;
     private bool _lightActive;
     private Light _lantern;
     
     public void SetLightActive(bool active) 
     {
         _lightActive = active;
+    }
+
+    public bool GetLightActive()
+    {
+        return _lightActive;
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,8 +38,9 @@ public class BlackLight : MonoBehaviour
             foreach(Collider ghost in ghosts)
             {
                 // if nothing is in the way
-                if (!Physics.Linecast(transform.position, ghost.transform.position))
+                if (!Physics.Linecast(transform.position, ghost.transform.position, (1 << 16)))
                 {
+                    print(ghost);
                     ghost.gameObject.GetComponent<GhostAI>().ShineBlackLight();
                 }
             }

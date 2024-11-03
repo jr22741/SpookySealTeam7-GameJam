@@ -87,16 +87,13 @@ public class PlayerController : MonoBehaviour
         _cam.transform.localEulerAngles = _camRotation;
         
         // OTHER INPUTS
-        if (!Input.GetAxis("Fire1").Equals(0.0f)) {
+        if (!Input.GetAxis("Fire1").Equals(0.0f) && !_light.GetLightActive()) {
             _gun.SetGunActive(true);
-        } else {
-            _gun.SetGunActive(false);
-        }
-
-        if (!Input.GetAxis("Fire2").Equals(0.0f)) {
+        } else if (!Input.GetAxis("Fire2").Equals(0.0f) && !_gun.GetGunActive()) {
             _light.SetLightActive(true);
         } else {
             _light.SetLightActive(false);
+            _gun.SetGunActive(false);
         }
     }
 }
