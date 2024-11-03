@@ -9,7 +9,6 @@ public class Gun : MonoBehaviour
     [SerializeField] private float acceleration = 16.0f;
     [SerializeField] private ParticleSystem suck;
     [SerializeField] private ParticleSystem[] bolts;
-
     [SerializeField] private Image suckBar;
     [SerializeField] private float suckAmount;
     [SerializeField] private float maxSuck;
@@ -103,10 +102,7 @@ public class Gun : MonoBehaviour
                 if (Vector3.Distance(hitInfo.transform.position, transform.position) < 0.6f)
                 {
                     Destroy(hitInfo.collider.gameObject);
-                    if (GameObject.FindGameObjectsWithTag("Ghost").Length == 0)
-                    {
-                        print("All ghosts destroyed!");
-                    }
+                    GetComponentInParent<PlayerController>().GameOver();
                 }
             }
             else

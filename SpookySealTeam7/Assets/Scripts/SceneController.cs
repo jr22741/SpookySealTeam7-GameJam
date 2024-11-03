@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    public void Menu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    
     public void Singleplayer()
     {
         Debug.Log("Loading single player");

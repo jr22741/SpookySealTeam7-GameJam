@@ -5,6 +5,8 @@ namespace player
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private GameObject pauseMenu;
+        [SerializeField] private GameObject gameOver;
         private CharacterController _controller;
         private GameObject _cam;
         private Gun _gun;
@@ -19,7 +21,18 @@ namespace player
         [SerializeField] private float mouseSpeed = 100.0f;
         [SerializeField] private float jumpHeight = 1.0f;
         [SerializeField] private float gravityValue = -9.81f;
-        
+        public void SetPaused(bool paused)
+        {
+            _paused = paused;
+        }
+
+        public void GameOver()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            SetPaused(true);
+            gameOver.gameObject.SetActive(true);
+        }
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -30,42 +43,48 @@ namespace player
             _light = gameObject.GetComponentInChildren<BlackLight>();
             _rotation = transform.localEulerAngles;
             _camRotation = _cam.transform.localEulerAngles;
+            pauseMenu.gameObject.SetActive(false);
         }
 
         // Update is called once per frame
         void Update()
         {
-            // Check for pause menu
-            if (Input.GetKeyDown(KeyCode.Escape))
+            // Invert cursor lock status and pause
+            Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
+            _paused = !_paused;
+            if (_paused)
             {
-                // Invert cursor lock status and pause
-                Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
-                _paused = !_paused;
+                pauseMenu.gameObject.SetActive(true);   
             }
-            
-            // Ignore movement if paused
-            if (_paused) return;
-            
-            // grounded timer to not infinitely jump
-            _grounded = _controller.isGrounded;
-            if (_grounded)
+            else
             {
-                groundedTimer = 0.2f;
+                pauseMenu.gameObject.SetActive(false);
             }
-            if (groundedTimer > 0)
-            {
-                groundedTimer -= Time.deltaTime;
-            }
-            if (_grounded && _verticalVelocity < 0)
-            {
-                _verticalVelocity = 0f;
-            }
-            
-            // gravity
-            _verticalVelocity += gravityValue * Time.deltaTime;
-            
-            // input
-            Vector3 move = transform.rotation * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        }
+        
+        // Ignore movement if paused
+        if (_paused) return;
+        
+        // grounded timer to not infinitely jump
+        _grounded = _controller.isGrounded;
+        if (_grounded)
+        {
+            groundedTimer = 0.2f;
+        }
+        if (groundedTimer > 0)
+        {
+            groundedTimer -= Time.deltaTime;
+        }
+        if (_grounded && _verticalVelocity < 0)
+        {
+            _verticalVelocity = 0f;
+        }
+        
+        // gravity
+        _verticalVelocity += gravityValue * Time.deltaTime;
+        
+        // input
+        Vector3 move = transform.rotation * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
             // player jump
             if (Input.GetButtonDown("Jump") && groundedTimer > 0)
