@@ -40,7 +40,6 @@ public class BlackLight : MonoBehaviour
                 // if nothing is in the way
                 if (!Physics.Linecast(transform.position, ghost.transform.position, (1 << 16)))
                 {
-                    print(ghost);
                     ghost.gameObject.GetComponent<GhostAI>().ShineBlackLight();
                 }
             }
