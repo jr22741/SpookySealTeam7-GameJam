@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour
 {
@@ -8,13 +9,30 @@ public class Gun : MonoBehaviour
     [SerializeField] private float acceleration = 16.0f;
     [SerializeField] private ParticleSystem suck;
     [SerializeField] private ParticleSystem[] bolts;
+
+    [SerializeField] private Image suckBar;
+    [SerializeField] private float suckAmount;
+    [SerializeField] private float maxSuck;
+
+    [SerializeField] private int counter;
+
     private float _rayLength;
     private bool _gunActive;
     private float _attractionSpeed;
 
     public void SetGunActive(bool active)
     {
-        _gunActive = active;
+        if ((_gunActive && !active) || (!_gunActive && active)) {
+            if (counter > 10) {
+                _gunActive = active && (suckAmount > 0);
+            } else {
+                counter++;
+            }
+        } else if (_gunActive && suckAmount <= 0) {
+            _gunActive = false;
+        } else {
+            _gunActive = active && (suckAmount > 0);
+        }
     }
 
     public bool GetGunActive()
@@ -38,20 +56,32 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        //edit suckbar
+        suckBar.fillAmount = suckAmount / maxSuck;
+
+
         ParticleSystem.EmissionModule emission;
         if (_gunActive)
         {
-            // Enable emission on lightning when firing
-            foreach (var bolt in bolts)
-            {
-                emission = bolt.emission;
-                emission.enabled = true;
-                emission = bolt.emission;
-                emission.enabled = true;
-                // extend particle system over time
-                if (_rayLength < maxRayLength) _rayLength += extendSpeed * Time.deltaTime;
-                var shape = bolt.shape;
-                shape.length = _rayLength;
+
+            //edit suck stamina
+            suckAmount -= 0.5f;
+            if (suckAmount < 0) suckAmount = 0;
+
+            if (suckAmount > 10) {
+
+                // Enable emission on lightning when firing
+                foreach (var bolt in bolts)
+                {
+                    emission = bolt.emission;
+                    emission.enabled = true;
+                    emission = bolt.emission;
+                    emission.enabled = true;
+                    // extend particle system over time
+                    if (_rayLength < maxRayLength) _rayLength += extendSpeed * Time.deltaTime;
+                    var shape = bolt.shape;
+                    shape.length = _rayLength;
+                }
             }
             
             // Raycast from the gun to see if it hits anything
@@ -59,7 +89,7 @@ public class Gun : MonoBehaviour
             int maxDist = 100;
             int layerMask = (1 << 6) + (1 << 7); // Only hit objects on the "Ghost" layer (6) and the "BlackLight" layer (7)
             RaycastHit hitInfo;
-            if (Physics.Raycast(transform.position, fwd, out hitInfo, maxDist, layerMask))
+            if (Physics.Raycast(transform.position, fwd, out hitInfo, maxDist, layerMask) && suckAmount > 10)
             {
                 // Enable emission on suck when hitting ghost
                 emission = suck.emission;
@@ -88,6 +118,10 @@ public class Gun : MonoBehaviour
         } 
         else 
         {
+
+            suckAmount += 0.5f;
+            if (suckAmount > maxSuck) suckAmount = maxSuck;
+
             _rayLength = 0;
             emission = suck.emission;
             emission.enabled = false;
