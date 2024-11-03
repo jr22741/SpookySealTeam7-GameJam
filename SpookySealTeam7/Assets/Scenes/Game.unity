@@ -5438,6 +5438,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 833320446849866146, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1809074286074033939, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
       propertyPath: m_Name
       value: Bolt
@@ -5489,6 +5493,14 @@ PrefabInstance:
     - target: {fileID: 5901422769347572570, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6901114439505782772, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7790072246008888808, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1255672119
       objectReference: {fileID: 0}
     - target: {fileID: 9042103075001263237, guid: c2b394a923f325416a8c4abe8e216138, type: 3}
       propertyPath: prewarm
