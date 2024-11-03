@@ -5,7 +5,7 @@ public class BlackLight : MonoBehaviour
 {
     [SerializeField] private float lightRadius = 5.0f;
     private bool _lightActive;
-    private Light _lantern;
+    private Light _light;
     
     public void SetLightActive(bool active) 
     {
@@ -20,8 +20,8 @@ public class BlackLight : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _lantern = GetComponentInChildren<Light>();
-        _lantern.gameObject.SetActive(false);
+        _light = GetComponentInChildren<Light>();
+        _light.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -29,8 +29,11 @@ public class BlackLight : MonoBehaviour
     {
         if (_lightActive)
         {
-            // enable lantern
-            _lantern.gameObject.SetActive(true);
+            // enable light and raise lantern
+            _light.gameObject.SetActive(true);
+            Vector3 pos = transform.localPosition;
+            pos.y = 0;
+            transform.localPosition = Vector3.Lerp(transform.localPosition, pos, 0.5f);
             
             // Check spherical area around the light to see if it hits anything
             int layerMask = 1 << 7; // Only hit objects on the "Blacklight" layer (7)
@@ -46,7 +49,10 @@ public class BlackLight : MonoBehaviour
         }
         else
         {
-            _lantern.gameObject.SetActive(false);
+            _light.gameObject.SetActive(false);
+            Vector3 pos = transform.localPosition;
+            pos.y = -0.75f;
+            transform.localPosition = Vector3.Lerp(transform.localPosition, pos, 0.5f);
         }
     }
 }
