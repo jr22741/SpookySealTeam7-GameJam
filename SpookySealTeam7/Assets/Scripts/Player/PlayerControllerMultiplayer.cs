@@ -16,6 +16,8 @@ public class PlayerControllerMultiplayer : NetworkBehaviour {
         private bool _grounded;
         private bool _paused;
         private float groundedTimer;
+        private bool isOpen = false;
+        [SerializeField] private OpenDoor doorController;
         [SerializeField] private float playerSpeed = 5.0f;
         [SerializeField] private float mouseSpeed = 100.0f;
         [SerializeField] private float jumpHeight = 1.0f;
@@ -33,6 +35,7 @@ public class PlayerControllerMultiplayer : NetworkBehaviour {
             _camRotation = _cam.transform.localEulerAngles;
             _transform = GetComponent<ClientNetworkTransform>();
             _menus = GameObject.Find("Menus");
+            doorController = GameObject.Find("MainDoor").GetComponent<OpenDoor>();
 
             if (!IsOwner)
             {
@@ -52,6 +55,11 @@ public class PlayerControllerMultiplayer : NetworkBehaviour {
 
         public override void OnNetworkSpawn()
         {
+            if (!IsServer)
+            {
+                return;
+            }
+
             gameObject.transform.position = GameObject.Find("SpawnPoint").transform.position;
             // Server-side monster init script here
             base.OnNetworkSpawn();
@@ -126,6 +134,12 @@ public class PlayerControllerMultiplayer : NetworkBehaviour {
                 _gun.SetGunActive(true);
             } else if (!Input.GetAxis("Fire2").Equals(0.0f) && !_gun.GetGunActive()) {
                 _light.SetLightActive(true);
+            } else if (Input.GetKeyDown("o") && !isOpen) {
+                Debug.Log("Opening");
+                if(IsServer) {
+                    isOpen = true;
+                    doorController.OpenDoors();
+                }
             } else {
                 _light.SetLightActive(false);
                 _gun.SetGunActive(false);
