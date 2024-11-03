@@ -18,7 +18,6 @@ namespace Ghost
 
         private void Awake()
         {   
-            playerTransform = GameObject.Find("/MainCamera").transform;
             _ghostMovement = GetComponent<GhostMovementMultiplayer>();
             _ghostVisibility = GetComponent<GhostVisibilityMultiplayer>();
             _transform = GetComponent<ClientNetworkTransform>();
@@ -26,6 +25,7 @@ namespace Ghost
 
         private void Update()
         {
+            playerTransform = GameObject.Find("MainCamera").transform;
             Vector3 direction = playerTransform.position - modelTransform.position;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             lookRotation = Quaternion.Euler(-90, lookRotation.eulerAngles.y, lookRotation.eulerAngles.z);
@@ -33,6 +33,10 @@ namespace Ghost
             
             if (_ghostMovement.IsStandingStill())
             {
+                if (!IsServer) {
+                    return;
+                }
+
                 _ghostVisibility.StandStill();
             }
             else
@@ -44,11 +48,17 @@ namespace Ghost
         public void ShineBlackLight()
         {
             if (!IsServer || !IsOwner) {
-                return;
+                ScareServerRpc();
             }
 
             _ghostVisibility.ResetVisibility();
             _ghostMovement.Move();
         }
+
+        [ServerRpc(RequireOwnership = false)]
+        private void ScareServerRpc() {
+            ShineBlackLight();
+        }
+
     }
 }

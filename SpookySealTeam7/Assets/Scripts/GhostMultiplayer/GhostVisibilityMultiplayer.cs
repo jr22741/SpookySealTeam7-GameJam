@@ -56,5 +56,17 @@ namespace Ghost
             model.layer = BlackLightLayer;
             _isVisible = false;
         }
+
+        [ServerRpc]
+        private void VisibilityServerRpc() {
+            VisibilityClientRpc();
+        }
+
+        [ClientRpc]
+        private void VisibilityClientRpc()
+        {
+            gameObject.layer = BlackLightLayer;
+            model.layer = BlackLightLayer;
+        }
     }
 }

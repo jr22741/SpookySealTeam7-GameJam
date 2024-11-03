@@ -40,8 +40,11 @@ public class BlackLight : MonoBehaviour
                 // if nothing is in the way
                 if (!Physics.Linecast(transform.position, ghost.transform.position, (1 << 16)))
                 {
-                    print(ghost);
-                    ghost.gameObject.GetComponent<GhostAI>().ShineBlackLight();
+                    if (ghost.gameObject.GetComponent<GhostAI>()) {
+                        ghost.gameObject.GetComponent<GhostAI>().ShineBlackLight();
+                    } else if (ghost.gameObject.GetComponent<GhostAIMultiplayer>()) {
+                        ghost.gameObject.GetComponent<GhostAIMultiplayer>().ShineBlackLight();
+                    }
                 }
             }
         }
