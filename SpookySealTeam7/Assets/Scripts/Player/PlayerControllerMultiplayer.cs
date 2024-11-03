@@ -25,7 +25,7 @@ public class PlayerControllerMultiplayer : NetworkBehaviour {
         
         void Start()
         {
-
+            Debug.Log("Starting");
             Cursor.lockState = CursorLockMode.Locked;
             _controller = gameObject.AddComponent<CharacterController>();
             _gun = gameObject.GetComponentInChildren<Gun>();
@@ -43,7 +43,8 @@ public class PlayerControllerMultiplayer : NetworkBehaviour {
             _menus.GetComponent<CanvasGroup>().alpha = 0;
             _menus.GetComponent<CanvasGroup>().interactable = false;
 
-            GameObject camera = GameObject.Find("MainCamera");
+            GameObject camera = GameObject.Find("/MainCamera");
+            Debug.Log(camera);
             camera.transform.SetParent(_cam.transform);
             camera.transform.position = _cam.transform.position;
             camera.transform.rotation = _cam.transform.rotation;
