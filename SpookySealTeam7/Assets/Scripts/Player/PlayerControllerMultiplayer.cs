@@ -7,7 +7,7 @@ namespace Player
 public class PlayerControllerMultiplayer : NetworkBehaviour {
         private CharacterController _controller;
         [SerializeField] private GameObject _cam;
-        private Gun _gun;
+        private GunMultiplayer _gun;
         private BlackLight _light;
         private float _verticalVelocity;
         private Vector3 _rotation;
@@ -25,10 +25,9 @@ public class PlayerControllerMultiplayer : NetworkBehaviour {
         
         void Start()
         {
-            Debug.Log("Starting");
             Cursor.lockState = CursorLockMode.Locked;
             _controller = gameObject.AddComponent<CharacterController>();
-            _gun = gameObject.GetComponentInChildren<Gun>();
+            _gun = gameObject.GetComponentInChildren<GunMultiplayer>();
             _light = gameObject.GetComponentInChildren<BlackLight>();
             _rotation = transform.localEulerAngles;
             _camRotation = _cam.transform.localEulerAngles;
@@ -49,6 +48,13 @@ public class PlayerControllerMultiplayer : NetworkBehaviour {
             camera.transform.position = _cam.transform.position;
             camera.transform.rotation = _cam.transform.rotation;
             
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            gameObject.transform.position = GameObject.Find("SpawnPoint").transform.position;
+            // Server-side monster init script here
+            base.OnNetworkSpawn();
         }
 
         // Update is called once per frame

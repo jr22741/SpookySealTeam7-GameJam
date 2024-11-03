@@ -21475,7 +21475,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8385184260395096376}
-  - component: {fileID: 1160987794120240023}
+  - component: {fileID: 6862816773986755192}
   m_Layer: 0
   m_Name: raygunV2
   m_TagString: Untagged
@@ -21503,7 +21503,7 @@ Transform:
   - {fileID: 1164358475887627847}
   m_Father: {fileID: 8058725442289373055}
   m_LocalEulerAnglesHint: {x: 0, y: -5, z: 0}
---- !u!114 &1160987794120240023
+--- !u!114 &6862816773986755192
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21512,7 +21512,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9157498113856603010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1bcb20a84d20544ebb4cb1fd589176c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ad6d591e45dadb4f80f7cef9a73a5dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   extendSpeed: 10
@@ -21523,3 +21523,7 @@ MonoBehaviour:
   - {fileID: 2589196744702019283}
   - {fileID: 1824469721381913726}
   - {fileID: 9042103075001263237}
+  suckBar: {fileID: 0}
+  suckAmount: 100
+  maxSuck: 100
+  counter: 0

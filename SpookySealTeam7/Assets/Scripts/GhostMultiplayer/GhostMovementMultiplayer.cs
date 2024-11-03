@@ -42,6 +42,38 @@ namespace Ghost
             return isStandingStill;
         }
 
+        public void Suck(Vector3 ghostToGunVec, float _attractionSpeed) 
+        {
+            SuckServerRpc(ghostToGunVec, _attractionSpeed);
+        }
+
+        public void KillGhostBySuck() 
+        {
+            KillServerRpc();
+        }
+
+        [ServerRpc (RequireOwnership = false)] 
+        private void SuckServerRpc(Vector3 ghostToGunVec, float _attractionSpeed) {
+            VisibilityClientRpc(ghostToGunVec, _attractionSpeed);
+        }
+
+        [ClientRpc]
+        private void VisibilityClientRpc(Vector3 ghostToGunVec, float _attractionSpeed)
+        {
+            transform.position += ghostToGunVec * (_attractionSpeed * Time.deltaTime);
+        }
+
+        [ServerRpc (RequireOwnership = false)] 
+        private void KillServerRpc() {
+            KillClientRpc();
+        }
+
+        [ClientRpc]
+        private void KillClientRpc()
+        {
+            Destroy(gameObject);
+        }
+
         [ServerRpc]
         private void MoveServerRpc(Vector3 position) {
             MoveClientRpc(position);
