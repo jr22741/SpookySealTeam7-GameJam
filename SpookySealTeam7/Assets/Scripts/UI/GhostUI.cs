@@ -6,19 +6,16 @@ namespace UI
     public class GhostUI : MonoBehaviour
     {
         [SerializeField] private GameObject ghost;
-        [SerializeField] private RawImage ghostImage;
-        [SerializeField] private Texture aliveSprite;
-        [SerializeField] private Texture deadSprite;
+        [SerializeField] private Sprite aliveSprite;
+        [SerializeField] private Sprite deadSprite;
+        private SpriteRenderer _ghostImage;
         
         void Start()
         {
-            if (ghostImage != null && aliveSprite != null && deadSprite != null)
+            _ghostImage = GetComponent<SpriteRenderer>();
+            if (_ghostImage != null && aliveSprite != null && deadSprite != null)
             {
-                ghostImage.texture = aliveSprite;
-            }
-            else
-            {
-                ghostImage.enabled = false;
+                _ghostImage.sprite = aliveSprite;
             }
         }
 
@@ -26,7 +23,7 @@ namespace UI
         {
             if (ghost == null)
             {
-                ghostImage.texture = deadSprite;
+                _ghostImage.sprite = deadSprite;
             }
         }
     }
