@@ -12,7 +12,7 @@ namespace Ghost
         private bool _isVisible = true;
 
         [SerializeField] private GameObject model;
-        [SerializeField] private float fadeDelay = 1f;
+        [SerializeField] private float fadeDelay = 2f;
 
         private void Start()
         {
