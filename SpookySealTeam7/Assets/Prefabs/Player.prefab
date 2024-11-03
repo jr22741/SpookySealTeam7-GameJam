@@ -5209,7 +5209,9 @@ GameObject:
   - component: {fileID: 2946007408698247372}
   - component: {fileID: 6934679206276565655}
   - component: {fileID: 2398773085278580564}
+  - component: {fileID: 7790072246008888808}
   - component: {fileID: 3229944835309568694}
+  - component: {fileID: -7179765161489787314}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5420,6 +5422,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music: {fileID: 8300000, guid: 4d87e77d5a3364643b9219b335e8e471, type: 3}
+--- !u!114 &7790072246008888808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839744528505950418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1672176959
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &3229944835309568694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5432,10 +5459,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31cb372a7a6fc150ca96a01c865e2bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  _cam: {fileID: 2413108597422492427}
   playerSpeed: 5
   mouseSpeed: 100
   jumpHeight: 1
   gravityValue: -9.81
+--- !u!114 &-7179765161489787314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839744528505950418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ff8e5d0f48b6e4ebfcb4837c9d699a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkTransformExpanded: 1
+  AuthorityMode: 0
+  TickSyncChildren: 0
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  SwitchTransformSpaceWhenParented: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &1862027633799050483
 GameObject:
   m_ObjectHideFlags: 0
@@ -10415,7 +10480,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2413108597422492427}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -10466,7 +10531,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2413108597422492427}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &7995159899946849444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21550,7 +21615,4 @@ MonoBehaviour:
   maxRayLength: 10
   acceleration: 16
   suck: {fileID: 3735354920499892407}
-  bolts:
-  - {fileID: 2589196744702019283}
-  - {fileID: 1824469721381913726}
-  - {fileID: 9042103075001263237}
+  bolts: []
